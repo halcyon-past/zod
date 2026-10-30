@@ -9,7 +9,6 @@
   "funding": "https://github.com/sponsors/colinhacks",
   "sideEffects": false,
   "files": [
-    "src",
     "index.js",
     "index.cjs",
     "index.d.ts",

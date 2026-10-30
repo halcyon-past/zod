@@ -16,7 +16,6 @@
     "./src/compile.ts"
   ],
   "files": [
-    "src",
     "**/*.js",
     "**/*.mjs",
     "**/*.cjs",

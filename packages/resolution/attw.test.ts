@@ -206,4 +206,24 @@ describe("Are The Types Wrong (attw) tests", () => {
       ***********************************"
     `);
   }, 120000);
+
+  it("should not include tests or src in packed zod tarball", async () => {
+    const { stdout } = await execa("npm", ["pack", "--dry-run", "--json"], {
+      cwd: path.join(__dirname, "node_modules", "zod"),
+    });
+    const [{ files }] = JSON.parse(stdout);
+    const paths: string[] = files.map((f: { path: string }) => f.path);
+    expect(paths.some((p) => p.startsWith("src/"))).toBe(false);
+    expect(paths.some((p) => p.includes("test"))).toBe(false);
+  });
+
+  it("should not include tests or src in packed @zod/mini tarball", async () => {
+    const { stdout } = await execa("npm", ["pack", "--dry-run", "--json"], {
+      cwd: path.join(__dirname, "node_modules", "@zod", "mini"),
+    });
+    const [{ files }] = JSON.parse(stdout);
+    const paths: string[] = files.map((f: { path: string }) => f.path);
+    expect(paths.some((p) => p.startsWith("src/"))).toBe(false);
+    expect(paths.some((p) => p.includes("test"))).toBe(false);
+  });
 });
